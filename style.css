@@ -1,0 +1,100 @@
+@font-face {
+    font-family: ssk;
+    src: url(./fonts/sitelenselikiwenmonoasuki1.woff2) format("woff2"),
+        url(./fonts/sitelenselikiwenmonoasuki1.woff) format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #000;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.font-pona {
+    font-family: 'ssk', sans-serif;
+}
+
+.font-pona-text {
+    font-family: 'ssk', sans-serif;
+    letter-spacing: -0.1em;
+}
+
+main {
+    text-align: center;
+    max-width: 400px;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.title .font-pona {
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.name {
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+}
+
+.tagline {
+    font-size: 0.95rem;
+    color: #888;
+    margin-bottom: 3rem;
+    line-height: 1.6;
+}
+
+.status {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.85rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 2px;
+    transition: border-color 0.2s;
+}
+
+a:hover {
+    border-color: #fff;
+}
+
+footer {
+    position: fixed;
+    bottom: 2rem;
+    font-size: 2rem;
+    color: #333;
+    letter-spacing: 0.05em;
+    text-rendering: optimizeLegibility;
+}
+
+footer .font-pona {
+    font-feature-settings: "liga" 1;
+}
