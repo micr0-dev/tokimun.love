@@ -17,13 +17,83 @@
             <span class="name">tokimun</span>
         </div>
         <p class="tagline">a language that compiles to lua, minus every pet peeve</p>
-        <p class="status">coming soon</p>
-        <a href="https://docs.tokimun.love">docs.tokimun.love</a>
+
+        <div class="version-container">
+            <a href="https://github.com/micr0-dev/tokimun/releases" class="version" id="version-link">
+                <span id="version-text">v0.1</span>
+                <span class="beta-tag" id="beta-tag" hidden>beta</span>
+            </a>
+        </div>
+
+        <div class="install-section">
+            <p class="install-label">install (linux and macOs)</p>
+            <div class="install-box">
+                <code id="install-cmd">curl -fsSL tokimun.love/install.sh | bash</code>
+                <button class="copy-btn" id="copy-btn" aria-label="Copy to clipboard">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <noscript>
+                <p class="noscript-note">or download from <a
+                        href="https://github.com/micr0-dev/tokimun/releases">releases</a></p>
+            </noscript>
+        </div>
+
+        <nav class="links">
+            <a href="https://docs.tokimun.love">docs</a>
+            <a href="https://github.com/micr0-dev/tokimun">github</a>
+        </nav>
     </main>
+
     <footer>
         <span class="font-pona-text">always</span> <span class="font-pona-text">with</span> <span
             class="font-pona">olin1</span>
     </footer>
+
+    <script>
+        (function () {
+            // Fetch latest version from GitHub
+            fetch('https://api.github.com/repos/micr0-dev/tokimun/releases/latest')
+                .then(r => r.json())
+                .then(data => {
+                    if (data.tag_name) {
+                        document.getElementById('version-text').textContent = data.tag_name;
+                        document.getElementById('version-link').href = data.html_url;
+                        if (data.prerelease) {
+                            document.getElementById('beta-tag').hidden = false;
+                        }
+                    }
+                })
+                .catch(() => {
+                    // fallback: try to get any release
+                    fetch('https://api.github.com/repos/micr0-dev/tokimun/releases')
+                        .then(r => r.json())
+                        .then(releases => {
+                            if (releases.length > 0) {
+                                const latest = releases[0];
+                                document.getElementById('version-text').textContent = latest.tag_name;
+                                document.getElementById('version-link').href = latest.html_url;
+                                if (latest.prerelease) {
+                                    document.getElementById('beta-tag').hidden = false;
+                                }
+                            }
+                        })
+                        .catch(() => { });
+                });
+
+            // Copy button
+            document.getElementById('copy-btn').addEventListener('click', function () {
+                const cmd = document.getElementById('install-cmd').textContent;
+                navigator.clipboard.writeText(cmd).then(() => {
+                    this.classList.add('copied');
+                    setTimeout(() => this.classList.remove('copied'), 1500);
+                });
+            });
+        })();
+    </script>
 </body>
 
 </html>
